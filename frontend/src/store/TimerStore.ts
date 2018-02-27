@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-export default class State {
+export default class TimerStore {
   @observable timer = 0;
 
   constructor() {

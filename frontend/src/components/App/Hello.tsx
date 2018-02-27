@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
-import State from '../../state';
+import TimerStore from '../../store/TimerStore';
 import './App.css';
 
 const logo = require('./logo.svg');
 
 interface InjectedProps {
-  state: State;
+  timerStore: TimerStore;
 }
 
-@inject('state') @observer
+@inject('timerStore') @observer
 class Hello extends React.Component {
 
   get injected() {
@@ -18,7 +18,7 @@ class Hello extends React.Component {
   }
 
   onReset = () => {
-    this.injected.state.resetTimer();
+    this.injected.timerStore.resetTimer();
   }
 
   render() {
@@ -28,7 +28,7 @@ class Hello extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Hello to React</h1>
           <button onClick={this.onReset}>
-            Seconds passed: {this.injected.state.timer}
+            Seconds passed: {this.injected.timerStore.timer}
           </button>
           <div>
             <Link to="/">Home</Link>

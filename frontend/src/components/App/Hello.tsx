@@ -11,7 +11,7 @@ interface InjectedProps {
 }
 
 @inject('state') @observer
-class App extends React.Component {
+class Hello extends React.Component {
 
   get injected() {
     return this.props as InjectedProps;
@@ -26,12 +26,12 @@ class App extends React.Component {
       <div className="App container">
         <div className="notification">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Hello to React</h1>
           <button onClick={this.onReset}>
             Seconds passed: {this.injected.state.timer}
           </button>
           <div>
-            <Link to="/hello">Hello</Link>
+            <Link to="/">Home</Link>
           </div>
         </div>
         <p className="App-intro">
@@ -42,4 +42,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Hello;

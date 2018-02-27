@@ -11,6 +11,7 @@
     "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts-ts": "2.13.0"
   },
   "scripts": {
@@ -28,6 +29,7 @@
     "@types/node": "^9.4.6",
     "@types/react": "^16.0.38",
     "@types/react-dom": "^16.0.4",
+    "@types/react-router-dom": "^4.2.4",
     "firebase-tools": "^3.17.4",
     "typescript": "^2.7.2"
   }

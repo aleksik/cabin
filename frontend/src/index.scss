@@ -1,1 +1,18 @@
-@import 'bulma/bulma'
+@import 'bulma/bulma';
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.App {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+}

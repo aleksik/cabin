@@ -4,6 +4,6 @@ root = true
 end_of_line = lf
 charset = utf-8
 
-[*.{js,ts,tsx,json}]
+[*.{js,ts,tsx,json,scss}]
 indent_style = space
 indent_size = 2

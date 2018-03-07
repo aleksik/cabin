@@ -1,11 +1,11 @@
-import TimerStore from './TimerStore';
+import SessionStore from './SessionStore';
 
 class RootStore {
 
-  timerStore: TimerStore;
+  sessionStore: SessionStore;
 
   constructor() {
-    this.timerStore = new TimerStore();
+    this.sessionStore = new SessionStore();
   }
 }
 

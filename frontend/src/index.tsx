@@ -1,11 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Container from './views/Container';
 import PostsView from './views/Posts';
-import LoginView from './views/Login';
 import NavigationView from './views/Navigation';
 
 import store from './store';
@@ -18,8 +17,9 @@ ReactDOM.render(
       <>
         <NavigationView />
         <Container>
-          <Route exact={true} path="/" component={PostsView} />
-          <Route exact={true} path="/login" component={LoginView} />
+          <Switch>
+            <Route component={PostsView} />
+          </Switch>
         </Container>
       </>
     </Router>

@@ -3,12 +3,13 @@ import { observer, inject, } from 'mobx-react';
 import { withRouter } from 'react-router';
 import SessionStore from '../../store/SessionStore';
 import Spinner from '../../components/Spinner';
+import LoginView from '../../views/Login';
 import './Container.css';
 
 interface Props {
-  location?: any; // tslint:disable-line: no-any
-  children?: any; // tslint:disable-line: no-any
-  sessionStore?: any; // tslint:disable-line: no-any
+  location?: any;
+  children?: any;
+  sessionStore?: any;
 }
 
 interface InjectedProps {
@@ -17,7 +18,6 @@ interface InjectedProps {
 
 @inject('sessionStore')
 @observer
-@withRouter
 class Container extends React.Component {
 
   props: Props;
@@ -28,7 +28,16 @@ class Container extends React.Component {
 
   render() {
     const { sessionStore } = this.injectedProps;
-    const { isPending } = sessionStore;
+    const { isPending, isAuthenticated } = sessionStore;
+
+    // Display the login view if user is not authenticated
+    if (!isPending && !isAuthenticated) {
+      return (
+        <div className="Container">
+          <LoginView />
+        </div>
+      );
+    }
 
     return (
       <div className={`Container ${isPending && '-hasSpinner'}`}>
@@ -42,4 +51,4 @@ class Container extends React.Component {
   }
 }
 
-export default Container;
+export default withRouter<any>(Container);

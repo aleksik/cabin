@@ -1,16 +1,14 @@
 import React from 'react';
 import { observer, inject, } from 'mobx-react';
+import { withRouter } from 'react-router';
 import SessionStore from '../../store/SessionStore';
 import Spinner from '../../components/Spinner';
 import './Container.css';
 
 interface Props {
-  // tslint:disable-next-line: no-any
-  location?: any;
-  // tslint:disable-next-line: no-any
-  children?: any;
-  // tslint:disable-next-line: no-any
-  sessionStore?: any;
+  location?: any; // tslint:disable-line: no-any
+  children?: any; // tslint:disable-line: no-any
+  sessionStore?: any; // tslint:disable-line: no-any
 }
 
 interface InjectedProps {
@@ -19,6 +17,7 @@ interface InjectedProps {
 
 @inject('sessionStore')
 @observer
+@withRouter
 class Container extends React.Component {
 
   props: Props;

@@ -15,18 +15,13 @@ import './index.css';
 ReactDOM.render(
   <Provider {...store}>
     <Router>
-      <Route 
-        path="/" 
-        render={({ location }) => (
-          <>
-            <NavigationView />
-            <Container location={location}>
-              <Route exact={true} path="/" component={PostsView} />
-              <Route exact={true} path="/login" component={LoginView} />
-            </Container>
-          </>
-        )}
-      />
+      <>
+        <NavigationView />
+        <Container>
+          <Route exact={true} path="/" component={PostsView} />
+          <Route exact={true} path="/login" component={LoginView} />
+        </Container>
+      </>
     </Router>
   </Provider>,
   document.getElementById('root') as HTMLElement

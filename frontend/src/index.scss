@@ -1,18 +1,22 @@
 @import 'bulma/bulma';
+@import '_config.scss';
 
-html, body {
-    height: 100%;
+html {
+  height: 100%;
 }
 
 body {
-    display: flex;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+  min-height: 100%;
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: $colorLight;
 }
 
 .App {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: row;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  padding-left: 100px;
 }

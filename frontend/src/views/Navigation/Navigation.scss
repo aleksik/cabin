@@ -1,5 +1,10 @@
 .Navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
   background-color: hsl(204, 86%, 53%);
+  background-color: rgb(172, 35, 24);
   width: 100px;
   color: #fff;
   font-size: 32px;

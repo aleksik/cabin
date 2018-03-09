@@ -20,6 +20,13 @@ class SessionStore {
     });
   }
 
+  getToken(): Promise<string> {
+    if (firebase.auth.currentUser) {
+      return firebase.auth.currentUser.getToken();
+    }
+    return Promise.reject('Not logged in');
+  }
+
   login(email: string, password: string) {
     this.setPending(true);
     this.setUser(null);

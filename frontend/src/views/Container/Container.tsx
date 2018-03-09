@@ -33,14 +33,14 @@ class Container extends React.Component {
     // Display the login view if user is not authenticated
     if (!isPending && !isAuthenticated) {
       return (
-        <div className="Container">
+        <div className="Container section">
           <LoginView />
         </div>
       );
     }
 
     return (
-      <div className={`Container ${isPending && '-hasSpinner'}`}>
+      <div className={`Container section ${isPending && '-hasSpinner'}`}>
         {
           isPending ?
           <Spinner /> :

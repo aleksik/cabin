@@ -1,21 +1,30 @@
+@import 'bulma/sass/utilities/mixins';
+
 .Navigation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
   background-color: hsl(204, 86%, 53%);
   background-color: rgb(172, 35, 24);
-  width: 100px;
   color: #fff;
   font-size: 32px;
   padding: 10px;
   display: flex;
   flex-direction: column;
 
+  @include tablet {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+  }
+
   ul {
     flex-grow: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+
+    @include tablet {
+      flex-direction: column;
+    }
   }
 
   li {
@@ -25,15 +34,23 @@
 
     &:last-child {
       flex-grow: 1;
+
+      @include mobile {
+        align-items: flex-end;
+      }
     }
   }
 
   a {
     color: #fff;
-    display: block;
+    display: inline-block;
     padding: 10px;
     opacity: .9;
     text-align: center;
+
+    @include tablet {
+      display: block;
+    }
 
     &:hover {
       color: #fff;

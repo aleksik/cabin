@@ -1,5 +1,14 @@
-@import 'bulma/bulma';
+@import 'bulma/sass/utilities/initial-variables';
+@import 'bulma/sass/utilities/functions';
 @import '_config.scss';
+
+$primary: $colorBlue;
+$section-padding: 1.5rem 1.5rem;
+
+@import 'bulma/sass/utilities/derived-variables.sass';
+@import 'bulma/bulma';
+
+
 
 html {
   height: 100%;
@@ -17,6 +26,10 @@ body {
 .App {
   display: flex;
   flex-grow: 1;
-  flex-direction: row;
-  padding-left: 100px;
+  flex-direction: column;
+
+  @include tablet {
+    flex-direction: row;
+    padding-left: 100px;
+  }
 }

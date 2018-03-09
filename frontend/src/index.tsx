@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import Container from './views/Container';
 import PostsView from './views/Posts';
@@ -18,7 +18,8 @@ ReactDOM.render(
         <NavigationView />
         <Container>
           <Switch>
-            <Route component={PostsView} />
+            <Redirect exact={true} from="/" to="/posts" />
+            <Route path="/posts" component={PostsView} />
           </Switch>
         </Container>
       </>

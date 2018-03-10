@@ -1,5 +1,15 @@
-# Cabin
+<h1 align="center">Cabin</h1>
 
-Cabin management app with React, TypeScript and Firebase.
+<div align="center">Cabin management app built with React, TypeScript and Firebase.</div>
 
-[![CircleCI](https://circleci.com/gh/aleksik/cabin/tree/master.svg?style=svg)](https://circleci.com/gh/aleksik/cabin/tree/master)
+<br>
+
+<div align="center">
+  <a href="https://circleci.com/gh/aleksik/cabin/tree/master">
+    <img src="https://circleci.com/gh/aleksik/cabin/tree/master.svg?style=svg" alt="CircleCI">
+  </a>
+</div>
+
+<div align="center">
+  <img src="screenshot.png">
+</div>

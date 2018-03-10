@@ -1,60 +1,37 @@
 import * as React from 'react';
-import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import plusIcon from '@fortawesome/fontawesome-free-solid/faPlus';
-
-import SessionStore from '../../../store/SessionStore';
-
 import Card from '../../../components/Card';
+import fb from 'firebase';
+import firebase from '../../../firebase';
+import Post from '../../../types/Post';
 
-interface InjectedProps {
-  sessionStore: SessionStore;
-}
-
-@inject('sessionStore')
-@observer
 class ListPosts extends React.Component {
-  
-  get injectedProps() {
-    return this.props as InjectedProps;
+
+  state: {
+    posts: fb.firestore.QueryDocumentSnapshot[] | null;
+  };
+
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      posts: null
+    };
   }
-  
+
+  async componentDidMount() {
+    try {
+      const snapshot = await firebase.db.collection('posts').get();
+      this.setState({
+        posts: snapshot.docs
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   render() {
-
-    const posts = [
-      {
-        title: 'Lorem ipsum villa helena',
-        author: 'Antti',
-        image: 'https://picsum.photos/1280/640?image=1080'
-      },
-      {
-        title: 'Lorem ipsum villa helena',
-        author: 'Sari',
-        image: 'https://picsum.photos/1280/640?image=977'
-      },
-      {
-        title: 'Lorem ipsum villa helena',
-        author: 'Anna',
-        image: 'https://picsum.photos/1280/640?image=919'
-      },
-      {
-        title: 'Lorem ipsum villa helena',
-        author: 'Sari',
-        image: 'https://picsum.photos/1280/640?image=786'
-      },
-      {
-        title: 'Lorem ipsum villa helena',
-        author: 'Antti',
-        image: 'https://picsum.photos/1280/640?image=491'
-      },
-      {
-        title: 'Lorem ipsum villa helena',
-        author: 'Ilari',
-        image: 'https://picsum.photos/1280/640?image=292'
-      },
-    ];
-
     return (
       <div className="container is-fluid">
         <nav className="level">
@@ -68,15 +45,18 @@ class ListPosts extends React.Component {
           </div>
         </nav>
         <div className="columns is-multiline">
-          {posts.map(post => (
-            <div className="column is-half-tablet is-one-third-widescreen">
-              <Card
-                title={post.title}
-                author={post.author}
-                image={post.image}
-              />
-            </div>
-          ))}
+          {this.state.posts && this.state.posts.map(doc => {
+            const post = doc.data() as Post;
+            return (
+              <div key={doc.id} className="column is-half-tablet is-one-third-widescreen">
+                <Card
+                  title={post.title}
+                  author="Aleksi"
+                  image="https://picsum.photos/1280/640?image=786"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     );

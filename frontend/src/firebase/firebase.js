@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
 
+firebase.firestore.QueryDocumentSnapshot
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -16,7 +17,17 @@ if (!firebase.apps.length) {
 
 const auth = firebase.auth();
 const db = firebase.firestore();
+const storage = firebase.storage();
+
+auth.onAuthStateChanged(user => {
+  db.collection('users').doc(user.uid).set({
+    displayName: user.displayName,
+    photoURL: user.photoURL
+  });
+});
+
 export {
   auth,
-  db
+  db,
+  storage
 };

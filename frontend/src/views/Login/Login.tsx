@@ -1,51 +1,67 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import SessionStore from '../../store/SessionStore';
-import { Redirect } from 'react-router';
-
-interface InjectedProps {
-  sessionStore: SessionStore;
-}
+import './Login.css';
 
 @inject('sessionStore')
 @observer class Login extends React.Component {
   
-  emailInput: HTMLInputElement | null;
-  passwordInput: HTMLInputElement | null;
+  state: {
+    email: string;
+    password: string;
+    error: string|null;
+  };
 
   get injectedProps() {
-    return this.props as InjectedProps;
+    return this.props as {
+      sessionStore: SessionStore;
+    };
   }
 
-  onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  constructor(props: {}) {
+    super(props);
+    this.state = { email: '', password: '', error: null };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  handleInputChange(event: React.SyntheticEvent<HTMLInputElement>) {
+    const element = event.target as HTMLInputElement;
+    const { name, value } = element;
+    this.setState({ [name]: value });
+  }
+
+  onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const email = this.emailInput && this.emailInput.value;
-    const password = this.passwordInput && this.passwordInput.value;
-    if (email && password) {
-      const { sessionStore } = this.injectedProps;
-      sessionStore.login(email, password);
-    }
+    const { email, password } = this.state;
+    const { sessionStore } = this.injectedProps;
+    sessionStore.login(email, password);
   }
 
   render() {
-
-    // If user is logged in, redirect to /
     const { sessionStore } = this.injectedProps;
-    if (sessionStore.isAuthenticated === true) {
-      return <Redirect to="/" />;
-    }
 
     return (
       <div className="container">
         <h1 className="title is-1 has-text-centered">Villa Helena</h1>
-        <form className="box" onSubmit={this.onSubmit}>
+        <form className="box LoginForm" onSubmit={this.onSubmit}>
+
+          {sessionStore.errorMessage && (
+            <article className="message is-danger">
+              <div className="message-body">
+                {sessionStore.errorMessage}
+              </div>
+            </article>
+          )}
+
           <div className="field">
             <label className="label">Email</label>
             <div className="control">
               <input 
-                ref={el => this.emailInput = el}
+                onChange={this.handleInputChange}
+                name="email"
                 className="input" 
-                type="text" 
+                type="email" 
                 placeholder="user@email.com"
               />
             </div>
@@ -53,8 +69,9 @@ interface InjectedProps {
           <div className="field">
             <label className="label">Password</label>
             <div className="control">
-              <input 
-                ref={el => this.passwordInput = el}
+              <input
+                onChange={this.handleInputChange}
+                name="password"
                 className="input" 
                 type="password" 
                 placeholder="password"

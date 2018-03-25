@@ -28,10 +28,10 @@ class Container extends React.Component {
 
   render() {
     const { sessionStore } = this.injectedProps;
-    const { isPending, isAuthenticated } = sessionStore;
+    const { isPending, user } = sessionStore;
 
     // Display the login view if user is not authenticated
-    if (!isPending && !isAuthenticated) {
+    if (!isPending && user === null) {
       return (
         <div className="Container section">
           <LoginView />

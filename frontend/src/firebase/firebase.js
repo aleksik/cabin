@@ -20,7 +20,7 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 
 auth.onAuthStateChanged(user => {
-  db.collection('users').doc(user.uid).set({
+  user && db.collection('users').doc(user.uid).set({
     displayName: user.displayName,
     photoURL: user.photoURL
   });

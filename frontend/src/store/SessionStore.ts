@@ -7,16 +7,17 @@ useStrict(true);
 class SessionStore {
   @observable user: User | null;
   @observable isPending: boolean;
-  @observable isAuthenticated: boolean;
+  @observable errorMessage: string|null;
 
   constructor() {
     this.isPending = true;
-    this.isAuthenticated = false;
     this.user = null;
+    this.errorMessage = null;
     
     firebase.auth.onAuthStateChanged(user => {
       this.setUser(user);
       this.setPending(false);
+      this.setErrorMessage(null);
     });
   }
 
@@ -30,10 +31,14 @@ class SessionStore {
   login(email: string, password: string) {
     this.setPending(true);
     this.setUser(null);
-    firebase.auth.signInWithEmailAndPassword(email, password);
+    firebase.auth.signInWithEmailAndPassword(email, password)
+      .catch(error => {
+        this.setPending(false);
+        this.setErrorMessage('Wrong email or password.');
+      });
   }
 
-  logout() {
+  @action logout() {
     firebase.auth.signOut()
       .then(() => this.clearSession())
       .catch(() => this.clearSession());
@@ -41,16 +46,18 @@ class SessionStore {
 
   @action clearSession() {
     this.user = null;
-    this.isAuthenticated = false;
   }
 
   @action setUser(user: User | null) {
     this.user = user;
-    this.isAuthenticated = user !== null;
   }
 
   @action setPending(isPending: boolean) {
     this.isPending = isPending;
+  }
+
+  @action setErrorMessage(errorMessage: string|null) {
+    this.errorMessage = errorMessage;
   }
 }
 

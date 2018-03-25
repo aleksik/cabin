@@ -37,7 +37,8 @@ interface InjectedProps {
 
     return (
       <div className="container">
-        <form onSubmit={this.onSubmit}>
+        <h1 className="title is-1 has-text-centered">Villa Helena</h1>
+        <form className="box" onSubmit={this.onSubmit}>
           <div className="field">
             <label className="label">Email</label>
             <div className="control">
